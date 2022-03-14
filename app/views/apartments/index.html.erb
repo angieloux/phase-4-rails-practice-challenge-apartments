@@ -1,1 +1,11 @@
-<h1>haoisfjaoisjf</h1>
+<h1>Apartments</h1>
+
+<ul>
+<% @apartments.each do |apartment| %>
+   <li> <h3>Unit # <%= apartment.number %></h3>
+    <%= link_to "View details", apartment_path(apartment) %>
+    </li>
+
+<% end %>
+</ul>
+

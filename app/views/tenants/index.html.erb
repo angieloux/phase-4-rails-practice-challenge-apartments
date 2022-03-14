@@ -1,0 +1,9 @@
+<p>Tenant information: Unit <%= @apartment.number %></p>
+
+<ul>
+
+<li>Name:<%= @tenants.name %></li>
+<li>Age: <%= @tenants.age %></li>
+</ul>
+
+<%= link_to 'Edit tenant', edit_tenant_path(@tenants) %>
