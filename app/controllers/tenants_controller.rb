@@ -28,10 +28,15 @@ class TenantsController < ApplicationController
         end
     end
 
+    def edit
+    end
+
     def update
+        p "*********"
+        p @tenant
         respond_to do |format|
             if @tenant.update(tenant_params)
-                format.html { redirect_to @tenant, notice: "tenant #{tenant.number} successfully updated."}
+                format.html { redirect_to @tenant, notice: "tenant successfully updated."}
                 format.json { render 'show', status: :ok, location: @tenant}
             else
                 format.html { render :new, status: :unprocessable_entity }

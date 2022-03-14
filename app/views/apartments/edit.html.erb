@@ -1,0 +1,17 @@
+<h1>Edit apartment info</h1>
+
+
+
+<%= form_with url: '/apartments/:apartment_id/tenants' do |form| %>
+
+
+    <%= form.label :number %>
+    <%= form.number_field :number, placeholder: "#{@apartment.number}" %>
+
+
+    <%= form.submit "Update" %>
+
+    
+
+
+<% end %>

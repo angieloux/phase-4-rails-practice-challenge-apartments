@@ -3,10 +3,24 @@ Rails.application.routes.draw do
 
   
   root to: 'apartments#index'
-  resources :apartments do 
-    resources :tenants, shallow: true 
-    resources :leases, shallow: true 
-  end 
 
+  resources :apartments do 
+    resources :tenants, only: :index
+  end
+  resources :tenants
+  resources :leases, only: [:new, :create, :destroy, :show]
+  # resources :apartments do 
+  #   resources :tenants, shallow: true, only: [:show, :index]
+  #   resources :leases, shallow: true, only: [:new, :create, :destroy]
+  # end 
+  # resources :tenants do 
+  #   resources :apartments, shallow: true, only: [:show, :index]
+  #   resources :leases, shallow: true, only: [:new, :create, :destroy]
+  # end 
+
+  # resources :leases, shallow: true, only: [:new, :create, :destroy] do 
+  #   resources :apartments, shallow: true 
+  #   resources :tenants, shallow: true 
+  # end 
 
 end

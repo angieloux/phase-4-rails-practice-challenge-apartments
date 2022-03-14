@@ -1,1 +1,18 @@
-<%= render 'shared/form' %>
+<h1>Edit tenant info</h1>
+
+
+
+<%= form_with model: @tenant, method: :patch do |form| %>
+
+    <%= form.label :name %>
+    <%= form.text_field :name, placeholder: "#{@tenant.name}" %>
+
+    <%= form.label :age %>
+    <%= form.number_field :age, placeholder: "#{@tenant.age}" %>
+
+    <%= form.submit "Update" %>
+
+    
+
+
+<% end %>
