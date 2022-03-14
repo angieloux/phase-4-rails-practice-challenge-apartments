@@ -4,7 +4,7 @@ class TenantsController < ApplicationController
 
     def index
         # display the tenant/s of the chosen apartment 
-        @tenants = Tenant.find(params[:apartment_id])
+        @tenant = Tenant.find(params[:apartment_id])
         @apartment = Apartment.find(params[:apartment_id])
 
     end
@@ -44,7 +44,7 @@ class TenantsController < ApplicationController
     def destroy 
         @tenant.destroy
         respond_to do |format|
-            format.html { redirect_to root_path, notice: "tenant #{tenant.number} was successfully removed from the database." }
+            format.html { redirect_to root_path, notice: "tenant #{@tenant.name} was successfully removed from the database." }
             format.json { head :no_content }
         end
     end
@@ -55,7 +55,7 @@ class TenantsController < ApplicationController
     private
 
     def find_tenant
-        @tenant = tenant.find(params[:id])
+        @tenant = Tenant.find(params[:id])
     end
 
     def tenant_params

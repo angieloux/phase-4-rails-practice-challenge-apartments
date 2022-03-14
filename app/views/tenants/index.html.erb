@@ -2,8 +2,11 @@
 
 <ul>
 
-<li>Name:<%= @tenants.name %></li>
-<li>Age: <%= @tenants.age %></li>
+<li>Name:<%= @tenant.name %></li>
+<li>Age: <%= @tenant.age %></li>
+
 </ul>
 
-<%= link_to 'Edit tenant', edit_tenant_path(@tenants) %>
+<%= link_to 'View lease information', edit_tenant_path(@tenant.id) %> | 
+<%= link_to 'Edit tenant', edit_tenant_path(@tenant.id) %>
+<%= link_to 'Delete tenant', tenant_path(@tenant.id), method: :delete, data: {confirm: "Are you sure?"} %>
