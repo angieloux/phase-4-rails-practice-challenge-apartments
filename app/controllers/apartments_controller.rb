@@ -8,9 +8,6 @@ class ApartmentsController < ApplicationController
     end
 
     def show 
-        p "params are #{params[:number]}" 
-        p "************************"
-        pp params
     end
 
     def new
@@ -18,6 +15,7 @@ class ApartmentsController < ApplicationController
     end
 
     def create
+        @apartment = Apartment.new(apartment_params)
         respond_to do |format|
             if @apartment.save
                 format.html { redirect_to @apartment, notice: "Apartment #{@apartment.number} successfully created."}
