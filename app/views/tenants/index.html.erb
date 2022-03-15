@@ -1,12 +1,10 @@
-<p>Tenant information: Unit <%= @apartment.number %></p>
+<h1>Tenant</h1>
 
 <ul>
-
-<li>Name:<%= @tenant.name %></li>
-<li>Age: <%= @tenant.age %></li>
-
+<% @tenants.each do |tenant| %>
+   <li> <%= tenant.name %>
+    <%= link_to "View details", tenant_path(tenant) %>
+    </li>
+<% end %> 
 </ul>
 
-<%= link_to 'View lease information', edit_tenant_path(@tenant.id) %> | 
-<%= link_to 'Edit tenant', edit_tenant_path(@tenant) %>
-<%= link_to 'Delete tenant', tenant_path(@tenant.id), method: :delete, data: {confirm: "Are you sure?"} %>

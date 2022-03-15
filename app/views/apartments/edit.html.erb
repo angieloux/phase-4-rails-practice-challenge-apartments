@@ -1,9 +1,19 @@
 <h1>Edit apartment info</h1>
 
+<%= p params[:id] %>
 
+<%= form_with model: @apartment, url: apartment_path(@apartment), method: "patch" do |form| %>
+ <% if @apartment.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(apartment.errors.count, "error") %> prohibited this apartment from being saved:</h2>
 
-<%= form_with url: '/apartments/:apartment_id/tenants' do |form| %>
-
+      <ul>
+        <% apartment.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+              </ul>
+    </div>
+  <% end %>
 
     <%= form.label :number %>
     <%= form.number_field :number, placeholder: "#{@apartment.number}" %>

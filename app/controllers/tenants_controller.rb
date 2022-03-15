@@ -1,19 +1,27 @@
 class TenantsController < ApplicationController
-    before_action :find_tenant, only: %i[show edit update destroy ]
-    
+    before_action :find_tenant, only: %i[show edit update destroy ] 
 
     def index
         # display the tenant/s of the chosen apartment 
-        @tenant = Tenant.find(params[:apartment_id])
-        @apartment = Apartment.find(params[:apartment_id])
-
+        if params[:apartment_id] 
+            render 'show'
+        else
+            @tenants = Tenant.all 
+            redirect_to tenants_path(@tenants)
+        end  
+        
+        # @apartment_tenants = Tenant.find(params[:id])
+        p params
     end
 
     def show 
+        @apartment = Apartment.find(params[:apartment_id])
+        @tenant = Tenant.find(params[:id])
+        # redirect_to apartment_tenant_path(@tenant)
     end
 
     def new
-        @tenant = tenant.new
+        @tenant = Tenant.new
     end
 
     def create
@@ -29,11 +37,10 @@ class TenantsController < ApplicationController
     end
 
     def edit
+
     end
 
     def update
-        p "*********"
-        p @tenant
         respond_to do |format|
             if @tenant.update(tenant_params)
                 format.html { redirect_to @tenant, notice: "tenant successfully updated."}
@@ -62,6 +69,7 @@ class TenantsController < ApplicationController
     def find_tenant
         @tenant = Tenant.find(params[:id])
     end
+
 
     def tenant_params
         params.require(:tenant).permit(

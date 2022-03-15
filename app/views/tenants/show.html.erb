@@ -1,0 +1,13 @@
+<h1>Tenant information: Unit <%= @apartment.number %></h1>
+
+
+Unit <% @apartment.number %> is currently occupied by: 
+<ul>
+<li>Name:<%= @tenant.name %></li>
+<li>Age: <%= @tenant.age %></li>
+
+</ul>
+
+<%= link_to 'View lease information', edit_tenant_path(@tenant.id) %> | 
+<%= link_to 'Edit tenant', edit_tenant_path(@tenant) %>
+<%= link_to 'Delete tenant', tenant_path(@tenant.id), method: :delete, data: {confirm: "Are you sure?"} %>
