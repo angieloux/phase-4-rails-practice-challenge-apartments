@@ -1,10 +1,10 @@
 <%= form_with model: @apartment do |form| %>
  <% if @apartment.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(apartment.errors.count, "error") %> prohibited this apartment from being saved:</h2>
+      <p><%= pluralize(@apartment.errors.count, "error") %> prohibited this apartment from being saved:</p>
 
       <ul>
-        <% apartment.errors.full_messages.each do |message| %>
+        <% @apartment.errors.full_messages.each do |message| %>
           <li><%= message %></li>
         <% end %>
               </ul>
@@ -14,6 +14,6 @@
     <%= form.label :number %>
     <%= form.number_field :number, placeholder: "#{@apartment.number}" %>
 
-    <%= form.submit "Submit" %>
+    <%= form.submit %>
 
 <% end %>

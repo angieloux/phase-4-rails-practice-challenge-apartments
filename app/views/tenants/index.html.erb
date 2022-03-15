@@ -1,4 +1,4 @@
-<h1>Tenant</h1>
+<h1>Residents</h1>
 
 <ul>
 <% @tenants.each do |tenant| %>
@@ -7,4 +7,8 @@
     </li>
 <% end %> 
 </ul>
+
+<%= link_to "Add a new resident", new_tenant_path %>
+
+
 

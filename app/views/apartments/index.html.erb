@@ -1,12 +1,13 @@
 <h1>Apartments</h1>
-<%= link_to "Create a new apartment", new_apartment_path %>
 
 <ul>
 <% @apartments.each do |apartment| %>
-   <li> <h3>Unit # <%= apartment.number %></h3>
-    <%= link_to "View details", apartment_path(apartment) %>
+   <li> <h3>Unit # <%= link_to "#{apartment.number}", apartment_path(apartment) %></h3>
+    
     </li>
 
 <% end %>
 </ul>
+
+<%= link_to "Create a new apartment", new_apartment_path %> 
 

@@ -1,6 +1,10 @@
 # Intro
 
-My solution to the Rails challenge detailed below, presented [here](https://github.com/learn-co-curriculum/phase-4-rails-practice-challenge-apartments) by [@learn-co-curriculum](https://github.com/learn-co-curriculum). I started from scratch as opposed to cloning and created (ugly) views as well to get a better grip on Rails as a beginner. :)  
+My somewhat more in-depth/extended solution to the Rails challenge/prompt detailed below, presented [here](https://github.com/learn-co-curriculum/phase-4-rails-practice-challenge-apartments) by [@learn-co-curriculum](https://github.com/learn-co-curriculum). 
+
+I started from scratch as opposed to cloning and created (super ugly) views as well to get a better grip on Rails as a beginner. :nerd_face:	
+
+**Made w/ Rails 6.1.5 & Ruby 2.7.5**
 
 ________
 

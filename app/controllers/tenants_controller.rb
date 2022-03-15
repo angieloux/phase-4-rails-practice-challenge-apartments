@@ -3,19 +3,11 @@ class TenantsController < ApplicationController
 
     def index
         # display the tenant/s of the chosen apartment 
-        if params[:apartment_id] 
-            render 'show'
-        else
-            @tenants = Tenant.all 
-            redirect_to tenants_path(@tenants)
-        end  
-        
-        # @apartment_tenants = Tenant.find(params[:id])
-        p params
+        @tenants = Tenant.all
     end
 
     def show 
-        @apartment = Apartment.find(params[:apartment_id])
+        # @apartment = Apartment.find(params[:apartment_id])
         @tenant = Tenant.find(params[:id])
         # redirect_to apartment_tenant_path(@tenant)
     end
@@ -25,9 +17,10 @@ class TenantsController < ApplicationController
     end
 
     def create
+        @tenant = Tenant.new(tenant_params)
         respond_to do |format|
             if @tenant.save
-                format.html { redirect_to @tenant, notice: "tenant #{tenant.number} successfully created."}
+                format.html { redirect_to @tenant, notice: "tenant #{@tenant.name} (#{@tenant.age} y/o) successfully created."}
                 format.json { render 'show', status: :created, location: @tenant}
             else
                 format.html { render :new, status: :unprocessable_entity }
@@ -61,9 +54,6 @@ class TenantsController < ApplicationController
         end
     end
 
-
-
-
     private
 
     def find_tenant
@@ -72,8 +62,6 @@ class TenantsController < ApplicationController
 
 
     def tenant_params
-        params.require(:tenant).permit(
-            :age, :name
-        )
+        params.require(:tenant).permit(:age, :name)
     end
 end
