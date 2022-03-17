@@ -3,4 +3,15 @@
 <h2>Unit <%= @apartment.number %></h2>
 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque consequuntur deleniti facilis, magni doloremque sed dicta fugit quas nulla vitae in fugiat dolorem nemo ad, quos, quis qui? Nobis molestiae dolore quasi unde fugit distinctio ducimus excepturi animi amet provident maxime fuga a sed repellat, aspernatur optio dolorum ex eaque.</p>
 
+<ul>
+<% if !@vacancy %>
+    
+    <% @tenants.each do |tenant| %>
+        <li><%= tenant[:name] %> (<%= tenant[:age] %>)</li>
+    <% end %>
+<% else %>
+    <h1>NO VACANCY</h1>
+<% end %>
+</ul>
+
 <%= link_to "Edit Apartment", edit_apartment_path(@apartment) %> | <%= link_to "Delete Apartment", @apartment, method: :delete, data: {confirm: "Are you sure? This will delete the associated lease."}  %>

@@ -1,43 +1,23 @@
 class LeasesController < ApplicationController
-    before_action :find_lease, only: %i[show edit update destroy ]
-    
-
-    def index
-        # @leases = lease.all
-        # @tenants = Tenant.all
-        @leases = Lease.all
-    end
-
-    def show 
-    end
+    before_action :find_lease, only: %i[ destroy ]
+    before_action :set_form_variables, only: %i[ new ]
 
     def new
-        @lease = lease.new
+        @lease = Lease.new
     end
 
     def create
+        @lease = Lease.new(lease_params)
         respond_to do |format|
             if @lease.save
-                format.html { redirect_to @lease, notice: "lease #{lease.number} successfully created."}
+                format.html { redirect_to root_path, notice: "lease #{@lease.id} successfully created."}
                 format.json { render 'show', status: :created, location: @lease}
             else
+                set_form_variables
                 format.html { render :new, status: :unprocessable_entity }
-                format.json  {render json: @listing.errors, status: :unprocessable_entity }
+                format.json  {render json: @lease.errors, status: :unprocessable_entity }
             end
         end
-    end
-
-    def update
-        respond_to do |format|
-            if @lease.update(lease_params)
-                format.html { redirect_to @lease, notice: "lease #{lease.number} successfully updated."}
-                format.json { render 'show', status: :ok, location: @lease}
-            else
-                format.html { render :new, status: :unprocessable_entity }
-                format.json  {render json: @listing.errors, status: :unprocessable_entity }
-            end
-        end
-
     end
 
     def destroy 
@@ -48,9 +28,6 @@ class LeasesController < ApplicationController
         end
     end
 
-
-
-
     private
 
     def find_lease
@@ -60,8 +37,15 @@ class LeasesController < ApplicationController
     def lease_params
         params.require(:lease).permit(
             :rent,
-            apartment_attributes: [ :number ],
-            tenant_attributes: [ :age, :name]
+            :tenant_id, 
+            :apartment_id
         )
+    end
+
+    def set_form_variables
+        # Get all the apartments 
+        @apartments = Apartment.all
+        # Get all the tenants 
+        @tenants = Tenant.all
     end
 end

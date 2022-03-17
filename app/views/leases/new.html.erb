@@ -1,0 +1,25 @@
+<%= form_with model: @lease do |form| %>
+<% if @lease.errors.any? %>
+    <div id="error_explanation">
+      <p><%= pluralize(@lease.errors.count, "error") %> prohibited this lease from being saved:</p>
+
+      <ul>
+        <% @lease.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+              </ul>
+    </div>
+  <% end %>
+
+    <%= form.label :rent %>
+    <%= form.number_field :rent %>
+    
+
+    <%= form.label :apartment_id, class:"col form-label" %>
+    <%= form.select :apartment_id, @apartments.map {|a| [a.number, a.id]}, class: "form-select" %>
+
+    <%= form.label :tenant_id, class:"col form-label" %>
+    <%= form.select :tenant_id, @tenants.map {|t| [t.name, t.id]}, class: "form-select" %>
+
+        <%= form.submit %>
+<% end %>

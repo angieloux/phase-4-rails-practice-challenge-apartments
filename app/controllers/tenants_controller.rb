@@ -8,7 +8,7 @@ class TenantsController < ApplicationController
 
     def show 
         # @apartment = Apartment.find(params[:apartment_id])
-        @tenant = Tenant.find(params[:id])
+        # @tenant = Tenant.find(params[:id])
         # redirect_to apartment_tenant_path(@tenant)
     end
 

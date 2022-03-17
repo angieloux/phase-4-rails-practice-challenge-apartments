@@ -4,5 +4,7 @@ class Apartment < ApplicationRecord
     validates :number,
     presence: true,
     numericality: {only_integer: true} 
+    accepts_nested_attributes_for :tenants
+
 
 end

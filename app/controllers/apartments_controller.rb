@@ -1,17 +1,30 @@
 class ApartmentsController < ApplicationController
     before_action :find_apartment, only: %i[show edit update destroy ]
-    before_action :get_tenant, only: %i[show]
-    
 
     def index
         @apartments = Apartment.all
     end
 
-    def show 
-        @apartment = Apartment.find(params[:id])
-        # @tenant = Tenant.find(params[:id])
+   
+
+    def show
+        @tenants = get_tenants
+        @tenants.empty? ? @vacancy = true : @vacancy = false
     end
 
+
+    def get_tenants
+        tenants = []
+        t = 0 
+        @apartment.tenants.each do |tenant| 
+            tenants << {
+                name: @apartment.tenants[t].name,
+                age: @apartment.tenants[t].age
+            }
+            t += 1
+        end 
+        return tenants
+    end
     def new
         @apartment = Apartment.new
     end
@@ -54,11 +67,6 @@ class ApartmentsController < ApplicationController
 
     def find_apartment
         @apartment = Apartment.find(params[:id])
-    end
-
-    def get_tenant
-        # @tenant = Lease.tenant.where(tenant_id )
-        
     end
 
     def apartment_params
