@@ -1,7 +1,8 @@
 <h1>Apartments</h1>
+<p>occupied</p>
 
 <ul>
-<% @apartments.each do |apartment| %>
+<% @occupied_apartments.each do |apartment| %>
    <li> <h3>Unit # <%= link_to "#{apartment.number}", apartment_path(apartment) %></h3>
     
     </li>
@@ -9,6 +10,17 @@
 <% end %>
 </ul>
 
+
+<p>vacant</p>
+
+<ul>
+<% @vacant_apartments.each do |apartment| %>
+   <li> <h3>Unit # <%= link_to "#{apartment.number}", apartment_path(apartment) %></h3>
+    
+    </li>
+
+<% end %>
+</ul>
 
 <%= link_to "Create a new apartment", new_apartment_path %> 
 

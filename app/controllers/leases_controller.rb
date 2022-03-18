@@ -4,6 +4,8 @@ class LeasesController < ApplicationController
 
     def new
         @lease = Lease.new
+        @apartment = Apartment.find(params[:apartment_id])
+
     end
 
     def create
@@ -23,7 +25,7 @@ class LeasesController < ApplicationController
     def destroy 
         @lease.destroy
         respond_to do |format|
-            format.html { redirect_to root_path, notice: "lease #{lease.number} was successfully removed from the database." }
+            format.html { redirect_to root_path, notice: "lease #{@lease.number} was successfully removed from the database." }
             format.json { head :no_content }
         end
     end

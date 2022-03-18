@@ -1,4 +1,10 @@
-<%= form_with model: @lease do |form| %>
+
+
+<%= p "****************************************" %>
+<%= p @apartment %>
+
+<%= form_with do |form| %>
+
 <% if @lease.errors.any? %>
     <div id="error_explanation">
       <p><%= pluralize(@lease.errors.count, "error") %> prohibited this lease from being saved:</p>
@@ -10,7 +16,7 @@
               </ul>
     </div>
   <% end %>
-
+  <%= @apartment %>
     <%= form.label :rent %>
     <%= form.number_field :rent %>
     

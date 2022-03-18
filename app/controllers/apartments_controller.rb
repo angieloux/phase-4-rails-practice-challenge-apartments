@@ -3,6 +3,8 @@ class ApartmentsController < ApplicationController
 
     def index
         @apartments = Apartment.all
+        @occupied_apartments = @apartments.not_vacant
+        @vacant_apartments = @apartments.vacant
     end
 
    
@@ -13,18 +15,7 @@ class ApartmentsController < ApplicationController
     end
 
 
-    def get_tenants
-        tenants = []
-        t = 0 
-        @apartment.tenants.each do |tenant| 
-            tenants << {
-                name: @apartment.tenants[t].name,
-                age: @apartment.tenants[t].age
-            }
-            t += 1
-        end 
-        return tenants
-    end
+    
     def new
         @apartment = Apartment.new
     end
@@ -64,6 +55,19 @@ class ApartmentsController < ApplicationController
     end
 
     private
+
+    def get_tenants
+        tenants = []
+        t = 0 
+        @apartment.tenants.each do |tenant| 
+            tenants << {
+                name: @apartment.tenants[t].name,
+                age: @apartment.tenants[t].age
+            }
+            t += 1
+        end 
+        return tenants
+    end
 
     def find_apartment
         @apartment = Apartment.find(params[:id])
