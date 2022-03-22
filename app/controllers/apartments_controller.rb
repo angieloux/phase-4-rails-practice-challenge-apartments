@@ -10,11 +10,14 @@ class ApartmentsController < ApplicationController
    
 
     def show
-        @tenants = get_tenants
-        @tenants.empty? ? @vacancy = true : @vacancy = false
+        if @apartment.tenants.count > 0 
+            @tenants = get_tenants
+            @vacancy = false
+        else 
+            @vacancy = true 
+        end
+        @lease = Lease.where(apartment_id: @apartment.id)
     end
-
-
     
     def new
         @apartment = Apartment.new

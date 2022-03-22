@@ -11,8 +11,8 @@
     <% end %>
     </ul>
 <% else %>
-    <h1>Apartment VACANT! Sign a new lease  <%= link_to "here", new_apartment_lease_path(@apartment) %></h1>
+    <h1>Apartment VACANT! Sign a new lease  <%= link_to "here", new_lease_path(@lease) %></h1>
 <% end %>
 
 
-<%= link_to "Edit Apartment", edit_apartment_path(@apartment) %> | <%= link_to "Delete Apartment", @apartment, method: :delete, data: {confirm: "Are you sure? This will delete the associated lease."}  %>
+<%= link_to "Edit Apartment", edit_apartment_path(@apartment) %> | <%= link_to "Delete Apartment", @apartment, method: :delete, data: {confirm: "Are you sure? This will delete the associated lease."}  %> | <%= link_to "End lease", lease_path(@lease.ids), method: :delete, data: {confirm: "Are you sure? You will be charged early exit fees."} %>

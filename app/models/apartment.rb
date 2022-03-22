@@ -15,8 +15,7 @@ class Apartment < ApplicationRecord
     scope :not_vacant, -> {Apartment.joins(:leases)}
 
     # Return an apartment object for all apartments without leases.
-    scope :vacant, -> {Apartment.joins('LEFT OUTER JOIN leases ON (apartments.id = leases.apartment_id)').where('leases.apartment_id IS NULL')}
-
-    
+    # scope :vacant, -> {Apartment.joins('LEFT OUTER JOIN leases ON (apartments.id = leases.apartment_id)').where('leases.apartment_id IS NULL')}
+    scope :vacant, -> {Apartment.joins("LEFT OUTER JOIN leases ON apartments.id = leases.apartment_id").where(:leases => {:id => nil})}
 
 end

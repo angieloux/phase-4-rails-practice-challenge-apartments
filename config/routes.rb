@@ -4,11 +4,10 @@ Rails.application.routes.draw do
   
   root to: 'pages#home'
 
-  resources :apartments do 
-    resources :leases, only: [:new, :create, :destroy]
-  end
+  resources :apartments 
   # end
   resources :tenants 
+  resources :leases, only: [:new, :create, :destroy]
     # resources :apartments, only: [:index, :show]
   # end
   # resources :leases, only: [:new, :create, :destroy, :show]

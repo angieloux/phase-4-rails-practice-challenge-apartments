@@ -1,31 +1,59 @@
 
+<%= form_for @lease do |form| %>
 
-<%= p "****************************************" %>
-<%= p @apartment %>
+  <% if @lease.errors.any? %>
+      <div id="error_explanation">
+        <p><%= pluralize(@lease.errors.count, "error") %> prohibited this lease from being saved:</p>
 
-<%= form_with do |form| %>
+        <ul>
+          <% @lease.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+                </ul>
+      </div>
+    <% end %>
 
-<% if @lease.errors.any? %>
-    <div id="error_explanation">
-      <p><%= pluralize(@lease.errors.count, "error") %> prohibited this lease from being saved:</p>
 
-      <ul>
-        <% @lease.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-              </ul>
-    </div>
+  <div class="form-group mb-3">
+      <h4>Rent: <%= @rent %> per month</h4> 
+    </div>    
+
+
+<%# Selected apartment %>
+  <div class="form-group mb-3">
+      <%= form.label :apartment %>
+      <%= form.select :apartment_id, @apartments.vacant.map {|a| [a.number, a.id]}, class: "form-select" %>
+  </div>    
+
+
+  <%# Flatmate selection (Choose a tenant) %>
+  <div class="form-group mb-3">
+      <%= form.label "Select your name", class:"col form-label" %>
+      <%= form.select :tenant_id, @tenants.homeless.map {|t| [t.name, t.age, t.id]}, class: "form-select", :include_blank => true  %>
+      
+  </div>    
+
+  <p>
+  Is your name not listed? Sign up <%= link_to 'here', new_tenant_path %> first</p>
+  
+
+
+<!---
+  <%# Applicants name (Add a tenant) %>
+  <div class="form-group mb-3">
+  <%= form.fields_for :tenants do |x| %>
+      <%= x.label "Your name", class:"col form-label" %>
+      <%= x.text_field :name %>
+
+      <%= x.label :age, class:"col form-label" %>
+      <%= x.text_field :age %>
   <% end %>
-  <%= @apartment %>
-    <%= form.label :rent %>
-    <%= form.number_field :rent %>
-    
+  </div>    
+-->
 
-    <%= form.label :apartment_id, class:"col form-label" %>
-    <%= form.select :apartment_id, @apartments.map {|a| [a.number, a.id]}, class: "form-select" %>
+  <div class="actions">
+          <%= form.submit "Submit lease application" %>
+  </div>    
 
-    <%= form.label :tenant_id, class:"col form-label" %>
-    <%= form.select :tenant_id, @tenants.map {|t| [t.name, t.id]}, class: "form-select" %>
 
-        <%= form.submit %>
 <% end %>
